@@ -16,7 +16,7 @@ class Mylocation extends Component{
 
   componentDidMount = () => {
     let geoSuccess = (position) => {
-    axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=056260f3a8d2b570840586316e4da16a`)
+    axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=538ff8f34128e4b016704672d5a146b7`)
       .then((response) => {
         this.setState({
           list: response.data.list,
@@ -39,7 +39,7 @@ class Mylocation extends Component{
     let daycontent = [];
     for (let i = 0; i < this.state.list.length; i++){
       if (this.state.list[i].dt_txt.includes(e.target.innerHTML.split(" ")[1])) {
-        daycontent.push(this.state.list[i].dt_txt)
+        daycontent.push(this.state.list[i])
       }
     }
     this.setState({day: daycontent})

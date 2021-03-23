@@ -1,64 +1,56 @@
-import React, { Component } from 'react';
+import React,{ useState,useEffect } from 'react';
+import {useParams} from "react-router"
 import Daycontent from "./renderday"
-
 const axios = require('axios');
 
 
-class RenderWeek extends Component{
-  constructor(props) {
-    super(props)
-    this.state = {
-      list: null,
-      city: null,
-      day:null
-    }
-    this.test = this.test.bind(this)
-  }
+function RenderWeek(props) {
+  const [biglist, setList] = useState(null);
+  const [cityname, setCity] = useState(null);
+  const [dayweathers, setDay] = useState(null);
+  const {cityName} = useParams()
 
 
-  componentDidMount = () => {
-    axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${this.props.city}&appid=056260f3a8d2b570840586316e4da16a`)
+  useEffect(() => {
+    axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=538ff8f34128e4b016704672d5a146b7`)
       .then((response) => {
-        this.setState({
-          list: response.data.list,
-          city: this.props.city
-        })
+
+        setList(response.data.list)
+        setCity(props.city)
       })
      .catch((error) => {
        console.log(error);
      })
-  }
-  test = (e) => {
+  }, [])
+
+  let test = (e) => {
     let daycontent = [];
-    for (let i = 0; i < this.state.list.length; i++){
-      if (this.state.list[i].dt_txt.includes(e.target.innerHTML.split(" ")[1])) {
-        // console.log(this.state.list[i].dt_txt)
-        daycontent.push(this.state.list[i].dt_txt)
+    for (let i = 0; i < biglist.length; i++){
+      if (biglist[i].dt_txt.includes(e.target.innerHTML.split(" ")[1])) {
+        daycontent.push(biglist[i])
       }
     }
-    this.setState({day : daycontent})
+    setDay(daycontent)
   }
 
-  render() {
     return (
       <div>
-        <div>{this.state.city }</div>
-        {this.state.list &&
-          this.state.list.map((item) => {
+        <div>{cityname}</div>
+        {biglist &&
+          biglist.map((item,i) => {
           return (item.dt_txt.includes("15:00:00") &&
-            <div>
-              <button onClick ={this.test}>
+            <div key = {i}>
+              <button onClick ={test}>
                 {"Data " + item.dt_txt }
               {" //temp -" + Math.round(item.main.temp - 273.15)}
             </button>
             </div>
         )
           })}
-        {this.state.day && <Daycontent content={this.state.day} />}
+        {dayweathers && <Daycontent content={dayweathers} />}
 
       </div>
     )
-  }
 }
 
 export default RenderWeek;

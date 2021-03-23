@@ -1,15 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Daycontent extends Component{
+function Daycontent(props) {
+  // get list of one days ., in list mast be weather and data
 
-  render() {
-    return (
-      this.props.content.map((item,i) => {
-        return (
-          <div key = {i} >{item}</div>
-        )
-      })
-    )
-  }
+   return (
+    props.content.map((item,i) => {
+      return (
+        <div key={i} >
+          {item.dt_txt + "--"}
+          {Math.round(item.main.temp - 273.15)}
+        </div>
+        
+      )
+    })
+  )
 }
 export default Daycontent;
