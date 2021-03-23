@@ -1,30 +1,30 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-
 import Cities from './list';
+import './styles.css';
 
 
 
 function DropDown() {
-  let history = useHistory();
 
+  let history = useHistory();
   function selectCity(e) {
     history.push(`/${e.target.value}`);
-
   }
+
   return (
-      <div>
-        <select onChange ={selectCity}>
+      <div className = "firstPageContent">
+        <select className = "select" onChange = {selectCity}>
           <option>select city</option>
           {Cities.map((item , i) => {
             return (
-                <option to={item} key ={i}>{item}</option>
+                <option to={ item } key={ i } >{item}</option>
             )
           })}
         </select>
         <div>
-          <NavLink to="mylocation">myLocation</NavLink>
+          <NavLink to="mylocation" className= "location">myLocation</NavLink>
         </div>
       </div>
     );

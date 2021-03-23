@@ -1,27 +1,25 @@
-import React, { Component } from "react"
+import React, { useState,useEffect } from "react"
 import Daycontent from "./renderday"
+
+import "./styles.css"
 
 const axios = require('axios');
 
 
-class Mylocation extends Component{
-  constructor(props) {
-    super(props)
-    this.state = {
-      city: null,
-      list: null,
-      day:null
-    }
-  }
+function Mylocation (){
 
-  componentDidMount = () => {
+  const [list, setList] = useState(null);
+  const [city, setCity] = useState(null);
+  const [day, setDay] = useState(null);
+
+
+
+  useEffect(() => {
     let geoSuccess = (position) => {
     axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=538ff8f34128e4b016704672d5a146b7`)
       .then((response) => {
-        this.setState({
-          list: response.data.list,
-          city:response.data.city.name
-        })
+        setList(response.data.list)
+        setCity(response.data.city.name)
 
     })
     .catch((error) => {
@@ -29,41 +27,41 @@ class Mylocation extends Component{
     })
 
     };
-    var geoError = (position) => {
+    let geoError = (position) => {
       console.log("geoerror");
     };
     navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
-  }
+  }, []);
 
-  test = (e) => {
+  let opendaycontent = (e) => {
     let daycontent = [];
-    for (let i = 0; i < this.state.list.length; i++){
-      if (this.state.list[i].dt_txt.includes(e.target.innerHTML.split(" ")[1])) {
-        daycontent.push(this.state.list[i])
+    list.map((item) => {
+      if (item.dt_txt.includes(e.target.innerHTML.split(" ")[1])) {
+        daycontent.push(item);
       }
-    }
-    this.setState({day: daycontent})
-  }
+    });
+    setDay(daycontent);
+  };
 
-  render() {
-    return (
-
-      <div>
-        <div>{this.state.city }</div>
-        {this.state.list &&
-        this.state.list.map((item,i ) => {
+  return (
+    <div>
+      <div className = "dayname" >{ city }</div>
+      {list &&
+        <div className = "weekdayscontent">
+        {list.map((item,i ) => {
           return (item.dt_txt.includes("15:00:00") &&
-            <div key={i} >
-              <button onClick ={this.test}>
-                {"Data " + item.dt_txt }
-                {" //temp -" + Math.round(item.main.temp - 273.15)}
-              </button>
+            <div key={i}>
+              <div onClick ={opendaycontent}  className = "oneweekday">
+                {"Data " + item.dt_txt.split(" ")[0] }
+                {" temp -" + Math.round(item.main.temp - 273.15) + "C"}
+              </div>
             </div>
-        )
+          )
         })}
-      {this.state.day && <Daycontent content={this.state.day} />}
       </div>
-    )
-  }
+      }
+      {day && <Daycontent content={day} />}
+    </div>
+  )
 }
-export default Mylocation
+export default Mylocation;

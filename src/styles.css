@@ -1,0 +1,57 @@
+.firstPageContent{
+  display: flex;
+  align-items: center;
+}
+
+.daycontent{
+  border-style:solid;
+  max-width: 200px;
+  margin: 10px;
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  padding: 20px;
+}
+
+.oneweekday{
+  border-style:groove ;
+  border-radius: 15px;
+  border: 2px solid #73AD21;
+  padding: 10px; 
+  max-width: 250px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.big{
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  padding: 20px; 
+  width: 270px;
+  height: 500px;
+  display: flex;
+  align-items:flex-start;
+}
+
+.dayname{
+  color: red;
+  margin-left: 80px;
+}
+
+.select{
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  padding: 5px;
+
+}
+.location{
+  margin-left:  80px;
+    border-radius: 25px;
+  border: 2px solid #73AD21;
+  padding: 5px; 
+}
+
+.dropdownbox{
+  color: red;
+  border-radius: 25px;
+
+}

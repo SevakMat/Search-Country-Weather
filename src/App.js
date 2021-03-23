@@ -3,21 +3,23 @@ import DropDown from './dropdown';
 import { Route } from "react-router-dom";
 import RenderWeek from "./renderweek";
 import Mylocation from './mylocation';
+import './styles.css';
 
-function App () {
+
+function App() {
+
   return (
-    <div>
+    <div className="big" >
       <Route exact path="/">
-          <DropDown />
+          <DropDown/>
       </Route>
-      <Route exact path={"/mylocation"}>
-        <Mylocation />
+      <Route exact path = {"/mylocation"}>
+        <Mylocation/>
       </Route>
-
-        <Route exact path={`/:cityName`} >
+        <Route exact path = {`/:cityName`} >
           <RenderWeek/>
         </Route>
     </div>
   );
-}
+};
 export default App;

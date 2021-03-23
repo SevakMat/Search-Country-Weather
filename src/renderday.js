@@ -1,18 +1,20 @@
 import React from "react";
+import './styles.css';
 
 function Daycontent(props) {
-  // get list of one days ., in list mast be weather and data
 
-   return (
-    props.content.map((item,i) => {
-      return (
-        <div key={i} >
-          {item.dt_txt + "--"}
-          {Math.round(item.main.temp - 273.15)}
-        </div>
-        
-      )
-    })
+  return (
+  <div className = "daycontent">
+    {
+      props.content.map((item, i) => {
+        return (
+          <div key={i}>
+            {item.dt_txt.split(" ")[1] + ", Temp "}
+            {Math.round(item.main.temp - 273.15) + "C"}
+          </div>
+        )
+    })}
+  </div>
   )
 }
 export default Daycontent;
