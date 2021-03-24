@@ -13,12 +13,12 @@ function App() {
       <Route exact path="/">
           <DropDown/>
       </Route>
-      <Route exact path = {"/mylocation"}>
+      <Route exact path = {"/"}>
         <Mylocation/>
       </Route>
-        <Route exact path = {`/:cityName`} >
-          <RenderWeek/>
-        </Route>
+      <Route exact path = {`/:cityName`} >
+        <RenderWeek/>
+      </Route>
     </div>
   );
 };

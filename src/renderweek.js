@@ -39,7 +39,11 @@ function RenderWeek(props) {
 
   return (cityName !== "mylocation" &&
     <div>
-      <div className = "dayname">{ cityName }</div>
+    <div className="cityname">
+      <div >
+        {cityName}
+      </div>
+      </div>
       {biglist &&
         biglist.map((item,i) => {
         return (item.dt_txt.includes("15:00:00") &&

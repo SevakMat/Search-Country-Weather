@@ -8,7 +8,7 @@ function Daycontent(props) {
     {
       props.content.map((item, i) => {
         return (
-          <div key={i}>
+          <div className = "onehour" key={i}>
             {item.dt_txt.split(" ")[1] + ", Temp "}
             {Math.round(item.main.temp - 273.15) + "C"}
           </div>

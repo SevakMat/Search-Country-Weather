@@ -1,8 +1,3 @@
-.firstPageContent{
-  display: flex;
-  align-items: center;
-}
-
 .daycontent{
   border-style:solid;
   max-width: 200px;
@@ -10,14 +5,17 @@
   border-radius: 25px;
   border: 2px solid #73AD21;
   padding: 20px;
+  margin: auto;
+}
+
+.onehour{
+  text-align: center;
 }
 
 .oneweekday{
-  border-style:groove ;
   border-radius: 15px;
   border: 2px solid #73AD21;
   padding: 10px; 
-  max-width: 250px;
   cursor: pointer;
   margin: 10px;
 }
@@ -26,26 +24,25 @@
   border-radius: 25px;
   border: 2px solid #73AD21;
   padding: 20px; 
-  width: 270px;
+  width: 350px;
   height: 500px;
-  display: flex;
-  align-items:flex-start;
+  margin: auto;
 }
 
-.dayname{
-  color: red;
-  margin-left: 80px;
+.cityname{
+  text-align: center;
 }
 
-.select{
-  border-radius: 25px;
+.selectbox{
+  border-radius: 2px;
   border: 2px solid #73AD21;
-  padding: 5px;
-
+  display:block;
+  margin: 10px auto;
 }
+
 .location{
   margin-left:  80px;
-    border-radius: 25px;
+    border-radius: 2px;
   border: 2px solid #73AD21;
   padding: 5px; 
 }
@@ -53,5 +50,4 @@
 .dropdownbox{
   color: red;
   border-radius: 25px;
-
 }

@@ -1,8 +1,8 @@
 let Cities = [
-  "yerevan",
-  "jermuk",
-  "london",
-  "berlin"
+  "Yerevan",
+  "Jermuk",
+  "London",
+  "Berlin"
 ]
 
 

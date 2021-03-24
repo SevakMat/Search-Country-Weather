@@ -1,6 +1,5 @@
 import React, { useState,useEffect } from "react"
 import Daycontent from "./renderday"
-
 import "./styles.css"
 
 const axios = require('axios');
@@ -13,7 +12,7 @@ function Mylocation (){
   const [day, setDay] = useState(null);
 
 
-
+ 
   useEffect(() => {
     let geoSuccess = (position) => {
     axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=538ff8f34128e4b016704672d5a146b7`)
@@ -45,7 +44,7 @@ function Mylocation (){
 
   return (
     <div>
-      <div className = "dayname" >{ city }</div>
+      <div className = "cityname" >{"Your location is "+city }</div>
       {list &&
         <div className = "weekdayscontent">
         {list.map((item,i ) => {

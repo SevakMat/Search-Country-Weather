@@ -14,8 +14,9 @@ function DropDown() {
   }
 
   return (
-      <div className = "firstPageContent">
-        <select className = "select" onChange = {selectCity}>
+    <div className="firstPageContent">
+      <div >
+        <select className = "selectbox" onChange = {selectCity}>
           <option>select city</option>
           {Cities.map((item , i) => {
             return (
@@ -23,10 +24,8 @@ function DropDown() {
             )
           })}
         </select>
-        <div>
-          <NavLink to="mylocation" className= "location">myLocation</NavLink>
-        </div>
       </div>
-    );
+    </div>
+  );
 }
 export default DropDown;
