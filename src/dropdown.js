@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import Cities from './list';
 import './styles.css';

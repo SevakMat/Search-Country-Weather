@@ -42,6 +42,19 @@ function Mylocation (){
     setDay(daycontent);
   };
 
+  let averagetemp = (item) => {
+    let templist =[];
+    list.map((elem , i) => {
+      if (elem.dt_txt.includes(item.split(" ")[0])) {
+        templist.push(elem.main.temp)
+      }
+    })
+    let sumoftemp = templist.reduce(function(a, b){
+      return a + b;
+    }, 0);
+    return Math.round(sumoftemp / templist.length - 273.15)
+  }
+
   return (
     <div>
       <div className = "cityname" >{"Your location is "+city }</div>
@@ -52,7 +65,7 @@ function Mylocation (){
             <div key={i}>
               <div onClick ={opendaycontent}  className = "oneweekday">
                 {"Data " + item.dt_txt.split(" ")[0] }
-                {" temp -" + Math.round(item.main.temp - 273.15) + "C"}
+                {" temp- " + averagetemp(item.dt_txt)  + "C"}
               </div>
             </div>
           )
