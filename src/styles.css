@@ -1,4 +1,4 @@
-.daycontent{
+.day-content{
   border-style:solid;
   max-width: 200px;
   margin: 10px;
@@ -8,32 +8,21 @@
   margin: auto;
 }
 
-.onehour{
+.contain{
+   display:flex;
+   justify-content:center;
+   margin: 20px;
+}
+
+.one-hour{
   text-align: center;
 }
 
-.oneweekday{
-  border-radius: 15px;
-  border: 2px solid #73AD21;
-  padding: 10px; 
-  cursor: pointer;
-  margin: 10px;
-}
-
-.big{
-  border-radius: 25px;
-  border: 2px solid #73AD21;
-  padding: 20px; 
-  width: 350px;
-  height: 500px;
-  margin: auto;
-}
-
-.cityname{
+.city-name{
   text-align: center;
 }
 
-.selectbox{
+.select-box{
   border-radius: 2px;
   border: 2px solid #73AD21;
   display:block;
@@ -42,12 +31,18 @@
 
 .location{
   margin-left:  80px;
-    border-radius: 2px;
+  border-radius: 2px;
   border: 2px solid #73AD21;
-  padding: 5px; 
+  padding: 5px;
+}
+.one-weekday{
+  border-radius: 15px;
+  border: 2px solid #73AD21;
+  padding: 17px;
+  cursor: pointer;
+  margin: 10px;
 }
 
-.dropdownbox{
-  color: red;
-  border-radius: 25px;
+.weather-icon{
+  width:40px
 }
