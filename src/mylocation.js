@@ -72,13 +72,14 @@ const Mylocation = () => {
       weekContentList.map((item, i) => {
         return (item.dt_txt.includes("15:00:00") &&
           <div onClick={() => renderDayContent(item)} className="one-weekday" key={i}>
-            <img className="weather-icon" src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt='' />
             <div>{"Data " + item.dt_txt.split(" ")[0]}</div>
             <div>{"Max temp " + Math.round(item.main.temp_max - 273.15)+"C"}</div>
             <div>{"Min temp " + Math.round(item.main.temp_min - 273.15)+"C"}</div>
             <div>
               {" temp- " + averageTemp(item.dt_txt) + "C"}
             </div>
+            <img className="weather-icon" src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt='' />
+
           </div>
         );
       })

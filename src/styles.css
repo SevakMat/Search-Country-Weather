@@ -1,48 +1,71 @@
-.day-content{
-  border-style:solid;
-  max-width: 200px;
-  margin: 10px;
-  border-radius: 25px;
-  border: 2px solid #73AD21;
-  padding: 20px;
-  margin: auto;
+.test{
+  background-image: url("https://www.classical915.org/sites/wxxifm/files/202007/rain.jpg");
+  height: 640px;
+  background-position: center;
+  background-size: cover;
+
 }
 
 .contain{
-   display:flex;
-   justify-content:center;
-   margin: 20px;
+
+  display:flex;
+  justify-content:center;
+  margin: 20px;
+
 }
 
-.one-hour{
-  text-align: center;
-}
-
-.city-name{
-  text-align: center;
-}
-
-.select-box{
-  border-radius: 2px;
-  border: 2px solid #73AD21;
-  display:block;
-  margin: 10px auto;
+.one-weekday{
+  border-radius: 15px;
+  border: 2px solid  #2169ad;
+  padding: 17px;
+  cursor: pointer;
+  margin: 10px;
+  background-color: #2169ad;
 }
 
 .location{
   margin-left:  80px;
   border-radius: 2px;
-  border: 2px solid #73AD21;
+  border: 2px solid  #2169ad;
   padding: 5px;
 }
-.one-weekday{
-  border-radius: 15px;
-  border: 2px solid #73AD21;
-  padding: 17px;
-  cursor: pointer;
+
+.select-box{
+  border-radius: 2px;
+  border: 2px solid  #2169ad;
+  display:block;
+  margin: 10px auto;
+}
+
+.day-content{
+  display:flex;
+  justify-content:center;
+  max-width: 200px;
   margin: 10px;
+  border-radius: 25px;
+  padding: 20px;
+  margin: auto;
+}
+
+.one-hour{
+background-color:  #2169ad;
+padding: 5px;
+margin: 5px;
+text-align: center;
+border-radius: 5px;
+border: 2px solid  #2169ad;
+min-width: 100px;
+}
+
+.city-name{
+  text-align: center;
+  color:black;
+
 }
 
 .weather-icon{
-  width:40px
+  width:40px;
+  background-color:rgb(219, 217, 217);
+  border-radius: 5px;
 }
+

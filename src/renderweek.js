@@ -10,7 +10,7 @@ import './styles.css';
 const RenderWeek = () => {
 
   const [weekContentList, setList] = useState(null);
-  const [dayweathers, setDay] = useState(null);
+  const [dayWeathers, setDay] = useState(null);
   const { cityName } = useParams();
 
   const getWeatherData = () => {
@@ -39,7 +39,6 @@ const RenderWeek = () => {
       };
     };
     setDay(daycontent);
-    console.log(weekContentList);
   };
 
   const averagetemp = (item) => {
@@ -63,13 +62,14 @@ const RenderWeek = () => {
         return (item.dt_txt.includes("15:00:00") &&
           <span key={i}>
             <div onClick={() => opendaycontent(item)} className="one-weekday" >
-              <img className="weather-icon" src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt='' />
               <div>{"Data " + item.dt_txt.split(" ")[0]}</div>
               <div>{"Max temp " + Math.round(item.main.temp_max - 273.15)+"C"}</div>
               <div>{"Min temp " + Math.round(item.main.temp_min - 273.15)+"C"}</div>
               <div>
                 {" Temp " + averagetemp(item.dt_txt) + "C"}
               </div>
+              <img className="weather-icon" src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt='' />
+
             </div>
           </span>
         );
@@ -86,7 +86,7 @@ const RenderWeek = () => {
       <div className="contain">
         {weekDayRender()}
       </div>
-      {dayweathers && <Renderday content={dayweathers} />}
+      {dayWeathers && <Renderday content={dayWeathers} />}
     </div>
   );
 };
