@@ -11,9 +11,11 @@ import './styles.css';
 const App = () => {
 
   return (
-    <div className ="test">
-      <Route exact path="/weather">
+    <div className="background-img">
+      <Route path="/weather">
         <DropDown/>
+      </Route>
+      <Route exact path="/weather">
         <Mylocation/>
       </Route>
       <Route exact path = "/weather/:cityName" >

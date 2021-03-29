@@ -20,11 +20,10 @@ const Renderday = (props) => {
   return (
     <div>
       <div className="city-name">{props.content[0].dt_txt.split(" ")[0] }</div>
-      <div className="day-content">
+      <div className="hours-content">
         {renderDayContent()}
       </div>
     </div>
-      
   );
 };
 export default Renderday;

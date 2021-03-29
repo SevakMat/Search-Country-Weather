@@ -71,7 +71,7 @@ const Mylocation = () => {
     return (
       weekContentList.map((item, i) => {
         return (item.dt_txt.includes("15:00:00") &&
-          <div onClick={() => renderDayContent(item)} className="one-weekday" key={i}>
+          <div onClick={() => renderDayContent(item)} className="one-week-day" key={i}>
             <div>{"Data " + item.dt_txt.split(" ")[0]}</div>
             <div>{"Max temp " + Math.round(item.main.temp_max - 273.15)+"C"}</div>
             <div>{"Min temp " + Math.round(item.main.temp_min - 273.15)+"C"}</div>

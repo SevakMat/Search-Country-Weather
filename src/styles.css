@@ -1,20 +1,17 @@
-.test{
+.background-img{
   background-image: url("https://www.classical915.org/sites/wxxifm/files/202007/rain.jpg");
   height: 640px;
   background-position: center;
   background-size: cover;
-
 }
 
 .contain{
-
   display:flex;
   justify-content:center;
   margin: 20px;
-
 }
 
-.one-weekday{
+.one-week-day{
   border-radius: 15px;
   border: 2px solid  #2169ad;
   padding: 17px;
@@ -33,11 +30,10 @@
 .select-box{
   border-radius: 2px;
   border: 2px solid  #2169ad;
-  display:block;
-  margin: 10px auto;
+  margin: 10px;
 }
 
-.day-content{
+.hours-content{
   display:flex;
   justify-content:center;
   max-width: 200px;
@@ -60,7 +56,6 @@ min-width: 100px;
 .city-name{
   text-align: center;
   color:black;
-
 }
 
 .weather-icon{

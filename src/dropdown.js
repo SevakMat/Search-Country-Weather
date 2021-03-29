@@ -9,7 +9,6 @@ const DropDown = () => {
 
   const history = useHistory();
   const selectCity = (e) => {
-    console.log(e.target.value);
     history.push(`/weather/${e.target.value}`);
   };
 

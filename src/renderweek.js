@@ -16,7 +16,6 @@ const RenderWeek = () => {
   const getWeatherData = () => {
     axios.get(`${api.appAddress}?q=${cityName}&appid=${api.appId}`)
       .then((response) => {
-        console.log(response);
         setList(response.data.list);
       })
       .catch((error) => {
@@ -26,7 +25,8 @@ const RenderWeek = () => {
 
   useEffect( () => {
     getWeatherData();
-  }, []);
+    setDay(null);
+  }, [cityName]);
 
   const opendaycontent = (e) => {
 
@@ -49,8 +49,8 @@ const RenderWeek = () => {
         templist.push(weekContentList[elem].main.temp);
       }
     };
-    const sumoftemp = templist.reduce((a, b) => {
-      return a + b;
+    const sumoftemp = templist.reduce((sum, temp) => {
+      return sum + temp;
     }, 0);
     return Math.round(sumoftemp / templist.length - 273.15);
   };
@@ -61,7 +61,7 @@ const RenderWeek = () => {
       weekContentList.map((item, i) => {
         return (item.dt_txt.includes("15:00:00") &&
           <span key={i}>
-            <div onClick={() => opendaycontent(item)} className="one-weekday" >
+            <div onClick={() => opendaycontent(item)} className="one-week-day" >
               <div>{"Data " + item.dt_txt.split(" ")[0]}</div>
               <div>{"Max temp " + Math.round(item.main.temp_max - 273.15)+"C"}</div>
               <div>{"Min temp " + Math.round(item.main.temp_min - 273.15)+"C"}</div>
