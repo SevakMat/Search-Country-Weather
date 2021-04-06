@@ -14,10 +14,9 @@ const DropDown = () => {
 
   const dropdownRender = () => {
     return <select className="select-box" onChange={selectCity}>
-      <option>select city</option>
       {Cyties.map((item, i) => {
         return (
-          <option to={item} key={i} >{item}</option>
+          <option to={item} key={i} defaultValue>{item}</option>
         );
       })}
     </select>;

@@ -1,8 +1,8 @@
 const Cyties = [
-  "Yerevan",
   "Jermuk",
   "London",
-  "Berlin"
+  "Berlin",
+  "Yerevan"
 ];
 
 export default Cyties;

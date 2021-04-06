@@ -14,9 +14,11 @@ const RenderWeek = () => {
   const { cityName } = useParams();
 
   const getWeatherData = () => {
-    axios.get(`${api.appAddress}?q=${cityName}&appid=${api.appId}`)
+    const { appAddress, appId } = api;
+    axios.get(`${appAddress}?q=${cityName}&appid=${appId}`)
       .then((response) => {
-        setList(response.data.list);
+        const {data:{list}}=response;
+        setList(list);
       })
       .catch((error) => {
         console.log(error);
@@ -29,7 +31,6 @@ const RenderWeek = () => {
   }, [cityName]);
 
   const opendaycontent = (e) => {
-
     const daycontent = [];
     for (let i = 0; i < weekContentList.length; i++) {
       const deyData = (e.dt_txt.split(" ")[0]);
@@ -46,7 +47,8 @@ const RenderWeek = () => {
     const templist = [];
     for(const elem in weekContentList) {
       if (weekContentList[elem].dt_txt.includes(item.split(" ")[0])) {
-        templist.push(weekContentList[elem].main.temp);
+        const { main: { temp } } = weekContentList[elem];
+        templist.push(temp);
       }
     };
     const sumoftemp = templist.reduce((sum, temp) => {
@@ -58,15 +60,16 @@ const RenderWeek = () => {
   const weekDayRender = () => {
     if (!weekContentList) { return; }
     return (
-      weekContentList.map((item, i) => {
-        return (item.dt_txt.includes("15:00:00") &&
+      weekContentList.map(( item, i) => {
+        const { main: { temp_max, temp_min },dt_txt }=item;
+        return (dt_txt.includes("15:00:00") &&
           <span key={i}>
             <div onClick={() => opendaycontent(item)} className="one-week-day" >
               <div>{"Data " + item.dt_txt.split(" ")[0]}</div>
-              <div>{"Max temp " + Math.round(item.main.temp_max - 273.15)+"C"}</div>
-              <div>{"Min temp " + Math.round(item.main.temp_min - 273.15)+"C"}</div>
+              <div>{"Max temp " + Math.round(temp_max - 273.15)+"C"}</div>
+              <div>{"Min temp " + Math.round(temp_min - 273.15)+"C"}</div>
               <div>
-                {" Temp " + averagetemp(item.dt_txt) + "C"}
+                {" Temp " + averagetemp(dt_txt) + "C"}
               </div>
               <img className="weather-icon" src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt='' />
 

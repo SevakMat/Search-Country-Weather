@@ -8,21 +8,23 @@ import "./styles.css";
 
 
 const Mylocation = () => {
-
   const [weekContentList, setList] = useState(null);
   const [cityName, setCity] = useState(null);
   const [day, setDay] = useState(null);
 
   const getWeatherData = () => {
-
     const geoSuccess = (position) => {
-      axios.get(`${api.appAddress}?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${api.appId}`)
+      const { coords: { latitude, longitude } } = position;
+
+      axios.get(`${api.appAddress}?lat=${latitude}&lon=${longitude}&appid=${api.appId}`)
         .then((response) => {
-          setList(response.data.list);
-          setCity(response.data.city.name);
+          const { data: {city:{ name },list } } = response;
+
+          setList(list);
+          setCity(name);
         })
         .catch((error) => {
-          console.log("this is error", error);
+          console.log("this is ", error);
         });
     };
     const geoError = (position) => {
@@ -67,11 +69,11 @@ const Mylocation = () => {
 
   const weekDayRender = () => {
 
-    if (!weekContentList) { console.log("in render week", weekContentList); return; }
+    if (!weekContentList) { return; }
     return (
       weekContentList.map((item, i) => {
         return (item.dt_txt.includes("15:00:00") &&
-          <div onClick={() => renderDayContent(item)} className="one-week-day" key={i}>
+          <div key={i} onClick={() => renderDayContent(item)} className="one-week-day" >
             <div>{"Data " + item.dt_txt.split(" ")[0]}</div>
             <div>{"Max temp " + Math.round(item.main.temp_max - 273.15)+"C"}</div>
             <div>{"Min temp " + Math.round(item.main.temp_min - 273.15)+"C"}</div>
