@@ -32,7 +32,6 @@ const Mylocation = () => {
       console.log(e)
     }
 
-
     const { data: {city:{ name },list } } = resp;
     setList(list);
     setCity(name);
@@ -41,8 +40,9 @@ const Mylocation = () => {
   };
 
   useEffect(() => {
+    
     getWeatherData();
-  }, []);
+  }, [cityName]);
 
 
   const weekDayRender = () => {
@@ -51,17 +51,13 @@ const Mylocation = () => {
     return (
       weekContentList.map((item, i) => {
 
-        const { main: { temp_max, temp_min },dt_txt }=item;
+        const {dt_txt }=item;
         const data =`Data ${item.dt_txt.split(" ")[0]}`;
-        const maxTemp = `Max temp ${Math.round(temp_max - 273.15)}C`;
-        const minTemp = `Min temp ${Math.round(temp_min - 273.15)}C`;
         const AverageTemp = `temp ${averageTemp(dt_txt,weekContentList)}C`;
 
         return (item.dt_txt.includes("15:00:00") &&
           <div key={i} onClick={() => setDay(renderDayContent(item,weekContentList))} className="one-week-day" >
             <div>{data}</div>
-            <div>{maxTemp}</div>
-            <div>{minTemp}</div>
             <div>{AverageTemp}</div>
             <img className="weather-icon" src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt='' />
           </div>
