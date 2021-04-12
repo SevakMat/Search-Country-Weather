@@ -1,16 +1,20 @@
 import React from "react";
 import './styles.css';
 
-const Renderday = (props) => {
+const RenderHouersList = (props) => {
 
-  const renderDayContent = () => {
+  const renderHouersContent = () => {
     return props.content.map((item, i) => {
+      const windSpeed = `wind speed ${item.wind.speed} `
+      const maxTemp =`Max temp ${Math.round(item.main.temp_max - 273.15)} C`
+      const minTemp =`Min temp ${Math.round(item.main.temp_min - 273.15)} C`
+
       return (
         <div className="one-hour" key={i}>
           <div>{item.dt_txt.split(" ")[1].substr(0, 5)}</div>
-          <div>{" Temp " + Math.round(item.main.temp - 273.15) + "C"}</div>
-          <div>{"Max temp " + Math.round(item.main.temp_max - 273.15)+"C"}</div>
-          <div>{"Min temp " + Math.round(item.main.temp_min - 273.15)+"C"}</div>
+          <div>{windSpeed}</div>
+          <div>{maxTemp}</div>
+          <div>{minTemp}</div>
           <img className="weather-icon" src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt='' />
         </div>
       );
@@ -21,9 +25,9 @@ const Renderday = (props) => {
     <div>
       <div className="city-name">{props.content[0].dt_txt.split(" ")[0] }</div>
       <div className="hours-content">
-        {renderDayContent()}
+        {renderHouersContent()}
       </div>
     </div>
   );
 };
-export default Renderday;
+export default RenderHouersList;

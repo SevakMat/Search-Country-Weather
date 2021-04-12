@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 
-import Renderday from "./Renderday";
-import {getPosition, getDataFropApi, averageTemp, renderDayContent} from "../util/service";
+import RenderHouersList from "./renderHouersContent";
+import {getPosition, getDataFropApi} from "../util/service";
 import {LOADING_ICON_URL} from "../util/constante"
+import WeekDaysList from "./WeekDaysList"
+
 import "./styles.css";
 
-
 const Mylocation = () => {
-  const [weekContentList, setWeekContentList] = useState(null);
-  const [cityName, setCity] = useState(null);
+  const [ListFromApi, setListFromApi] = useState(null);
+  const [selectedCityName, setCity] = useState(null);
   const [selectidDay, setDay] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -33,7 +34,7 @@ const Mylocation = () => {
     }
 
     const { data: {city:{ name },list } } = resp;
-    setWeekContentList(list);
+    setListFromApi(list);
     setCity(name);
     setLoading(false);
 
@@ -42,37 +43,19 @@ const Mylocation = () => {
   useEffect(() => {
     
     getWeatherData();
-  }, [cityName]);
+  }, [selectedCityName]);
 
-
-  const weekDayRender = () => {
-
-    if (!weekContentList) { return 0; }
-    return weekContentList.map((item, i) => {
-
-        const {dt_txt }=item;
-        const data =`Data ${item.dt_txt.split(" ")[0]}`;
-        const AverageTemp = `temp ${averageTemp(dt_txt,weekContentList)}C`;
-
-        return (item.dt_txt.includes("15:00:00") &&
-        <span  key={i}>
-          <div onClick={() => setDay(renderDayContent(item,weekContentList))} className="one-week-day" >
-            <div>{data}</div>
-            <div>{AverageTemp}</div>
-            <img className="weather-icon" src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt='' />
-          </div>
-        </span>
-        );
-      })
-  };
+  const test = (qqq)=>{
+    setDay(qqq)
+}   
 
   return (!loading ?
     <div>
-      <div className="city-name"> {`Your location is  ${cityName}`} </div>
+      <div className="city-name"> {`Your location is  ${selectedCityName}`} </div>
       <div className="contain">
-        {weekDayRender()}
+      <WeekDaysList ListFromApi={ListFromApi} test={test}/>
       </div>
-      {selectidDay && <Renderday content={selectidDay} />}
+      {selectidDay && <RenderHouersList content={selectidDay} />}
     </div>
     :
       <img alt ="" className="loading-icon" src={LOADING_ICON_URL}></img>

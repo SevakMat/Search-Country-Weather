@@ -2,7 +2,8 @@ const Cyties = [
   "Yerevan",
   "Jermuk",
   "London",
-  "Berlin"
+  "Berlin",
+  "Antananarivo"
 ];
 
 
