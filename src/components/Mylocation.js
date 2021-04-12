@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 
 import Renderday from "./Renderday";
-import {getPosition, getData, averageTemp, renderDayContent} from "../util/service";
+import {getPosition, getDataFropApi, averageTemp, renderDayContent} from "../util/service";
 import {LOADING_ICON_URL} from "../util/constante"
 import "./styles.css";
 
 
 const Mylocation = () => {
-  const [weekContentList, setList] = useState(null);
+  const [weekContentList, setWeekContentList] = useState(null);
   const [cityName, setCity] = useState(null);
-  const [day, setDay] = useState(null);
+  const [selectidDay, setDay] = useState(null);
   const [loading, setLoading] = useState(true);
 
 
@@ -27,13 +27,13 @@ const Mylocation = () => {
       y:longitude
     };
     try{
-      var resp = await getData(data);//var  
+      var resp = await getDataFropApi(data);//var  
     }catch(e){
       console.log(e)
     }
 
     const { data: {city:{ name },list } } = resp;
-    setList(list);
+    setWeekContentList(list);
     setCity(name);
     setLoading(false);
 
@@ -48,22 +48,22 @@ const Mylocation = () => {
   const weekDayRender = () => {
 
     if (!weekContentList) { return 0; }
-    return (
-      weekContentList.map((item, i) => {
+    return weekContentList.map((item, i) => {
 
         const {dt_txt }=item;
         const data =`Data ${item.dt_txt.split(" ")[0]}`;
         const AverageTemp = `temp ${averageTemp(dt_txt,weekContentList)}C`;
 
         return (item.dt_txt.includes("15:00:00") &&
-          <div key={i} onClick={() => setDay(renderDayContent(item,weekContentList))} className="one-week-day" >
+        <span  key={i}>
+          <div onClick={() => setDay(renderDayContent(item,weekContentList))} className="one-week-day" >
             <div>{data}</div>
             <div>{AverageTemp}</div>
             <img className="weather-icon" src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt='' />
           </div>
+        </span>
         );
       })
-    );
   };
 
   return (!loading ?
@@ -72,7 +72,7 @@ const Mylocation = () => {
       <div className="contain">
         {weekDayRender()}
       </div>
-      {day && <Renderday content={day} />}
+      {selectidDay && <Renderday content={selectidDay} />}
     </div>
     :
       <img alt ="" className="loading-icon" src={LOADING_ICON_URL}></img>

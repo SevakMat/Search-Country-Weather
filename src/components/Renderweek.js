@@ -2,14 +2,15 @@ import React, { useState,useEffect } from 'react';
 import { useParams } from "react-router";
 
 import Renderday from "./Renderday";
-import {getData, averageTemp, renderDayContent} from "../util/service";
+import {getDataFropApi, averageTemp, renderDayContent} from "../util/service";
 import {LOADING_ICON_URL} from "../util/constante"
+
 import './styles.css';
 
 const RenderWeek = () => {
 
-  const [weekContentList, setList] = useState(null);
-  const [dayWeathers, setDay] = useState(null);
+  const [weekContentList, setWeekContentList] = useState(null);
+  const [selectidDay, setDay] = useState(null);
   const [loading, setLoading] = useState(true);
   const { cityName } = useParams();
 
@@ -17,12 +18,12 @@ const RenderWeek = () => {
     const data = {city:cityName};
 
     try{
-      var resp = await getData(data);//var  
+      var resp = await getDataFropApi(data);//var  
     }catch(e){
       console.log(e)
     }
     const {data:{list}}=resp;
-    setList(list);
+    setWeekContentList(list);
     setDay(null);
     setLoading(false);
   };
@@ -33,8 +34,7 @@ const RenderWeek = () => {
 
   const weekDayRender = () => {
     if (!weekContentList) { return 0; }
-    return (
-      weekContentList.map(( item, i) => {
+    return weekContentList.map(( item, i) => {
 
         const {dt_txt }=item;
         const data =`Data${item.dt_txt.split(" ")[0]}`;
@@ -50,7 +50,6 @@ const RenderWeek = () => {
           </span>
         );
       })
-    );
   };
 
 
@@ -63,7 +62,7 @@ const RenderWeek = () => {
         <div className="contain">
           {weekDayRender()}
         </div>
-        {dayWeathers && <Renderday content={dayWeathers} />}
+        {selectidDay && <Renderday content={selectidDay} />}
       </div>
       :
       <img className="loading-icon" alt ="" src={LOADING_ICON_URL}></img>
