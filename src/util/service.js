@@ -1,7 +1,12 @@
 import axios from "axios";
-import {APP_ADDRESS,APP_Id} from "./constante";
+import React, { useState } from "react";
 
-export const getData = (data)=>{
+
+import {APP_ADDRESS,APP_Id} from "./constante";
+import Renderday from "../components/Renderday";
+
+
+export const getDataFropApi = (data)=>{
   let url;
   if(data.city){
     url = `${APP_ADDRESS}?q=${data.city}&appid=${APP_Id}`
@@ -62,3 +67,4 @@ export const renderDayContent = (e,weekContentList) => {
   });
   return daycontent;
 };
+
