@@ -12,6 +12,8 @@
 }
 
 .one-week-day{
+  min-width: 110px;
+  text-align: center;
   border-radius: 15px;
   border: 2px solid  #2169ad;
   padding: 17px;
@@ -50,7 +52,7 @@ margin: 5px;
 text-align: center;
 border-radius: 5px;
 border: 2px solid  #2169ad;
-min-width: 100px;
+min-width: 120px;
 }
 
 .city-name{
@@ -59,6 +61,7 @@ min-width: 100px;
 }
 
 .weather-icon{
+  margin-top: 5px;
   width:40px;
   background-color:rgb(219, 217, 217);
   border-radius: 5px;
