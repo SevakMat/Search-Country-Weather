@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 import RenderHouersList from "./renderHouersContent";
-import {getPosition, getDataFropApi} from "../util/service";
-import {LOADING_ICON_URL} from "../util/constante"
+import {getPosition, getDataFropApi} from "../utils/service";
+import {LOADING_ICON_URL} from "../utils/constants"
 import WeekDaysList from "./WeekDaysList"
 
 import "./styles.css";

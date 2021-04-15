@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import {APP_ADDRESS,APP_Id} from "./constante";
+import {APP_ADDRESS,APP_Id} from "./constants";
 
 
 export const getDataFropApi = (data)=>{
@@ -40,7 +40,6 @@ const listElemSum = (templist) => {
 
 export const averageTemp = (item,ListFromApi) => {
   const templist = [];
-
   ListFromApi.map((elem)=>{
     if (elem.dt_txt.includes(item.split(" ")[0])) {
       templist.push(elem.main.temp);
@@ -53,15 +52,9 @@ export const averageTemp = (item,ListFromApi) => {
 };
 
 export const renderDayContent = (e,ListFromApi) => {
-  const daycontent = [];
-  ListFromApi.map(( item) => {
+  return ListFromApi.filter(( item) => {
     const deyData = (e.dt_txt.split(" ")[0]);
-    const hoursInList = item.dt_txt.includes(deyData);
-    if (hoursInList) {
-      daycontent.push(item);
-    };
-    return 0;
+    return item.dt_txt.includes(deyData);
   });
-  return daycontent;
 };
 

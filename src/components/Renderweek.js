@@ -1,9 +1,10 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect,useCallback } from 'react';
 import { useParams } from "react-router";
 
 import RenderHouersList from "./renderHouersContent";
-import {getDataFropApi} from "../util/service";
-import {LOADING_ICON_URL} from "../util/constante"
+import {getDataFropApi} from "../utils/service";
+import {LOADING_ICON_URL} from "../utils/constants"
+
 import WeekDaysList from "./WeekDaysList"
 
 import './styles.css';
@@ -15,7 +16,8 @@ const RenderWeek = () => {
   const [loading, setLoading] = useState(true);
   const { cityName } = useParams();
 
-  const getWeatherData = async () => {
+  const getWeatherData = useCallback(  async (e) => {
+    console.log(e)
     const data = {city:cityName};
 
     try{
@@ -27,11 +29,11 @@ const RenderWeek = () => {
     setListFromApi(list);
     setDay(null);
     setLoading(false);
-  };
+  },[cityName]);
 
   useEffect( () => {
     getWeatherData();
-  }, [cityName]);
+  }, [cityName,getWeatherData]);
 
 const test = (qqq)=>{
     setDay(qqq)
