@@ -17,13 +17,13 @@ const DropDown = () => {
 
   const dropdownRender = () => {
     return (<>
-      <input type="text"  className="select-box" list="cars" onChange={selectCity}/>
+      <input type="text" className="select-box" list="cars" onChange={selectCity}/>
       <datalist id ="cars">
         {Cyties.map((item, i) => {
           return <option to={item} key={i} defaultValue>{item}</option>;
         })}
       </datalist>
-      </>
+    </>
     );
   };
 

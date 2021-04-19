@@ -3,7 +3,7 @@
 
   "rules": {
     "no-var": "error",
-    "semi": "warning", // storaketneri hamar
+    "semi": "error", // storaketneri hamar
     "no-multi-spaces": "error",
     "prefer-const": "error",
     "indent": ["error", 2]

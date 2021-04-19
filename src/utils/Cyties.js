@@ -1,12 +1,11 @@
-const Cyties = [
+const Cityes = [
   "YEREVAN",
   "JERMUK",
   "LONDON",
   "BERLIN",
   "ANTANANARIVO",
-  "TIMBUCTU",
   "YAKUTSK"
 ];
 
 
-export default Cyties;
+export default Cityes;

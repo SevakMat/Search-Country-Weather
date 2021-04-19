@@ -1,23 +1,20 @@
 import React from 'react';
 import { Route } from "react-router-dom";
 
+
 import DropDown from './components/Dropdown';
-import RenderWeek from "./components/Renderweek";
-import Mylocation from './components/Mylocation';
+import RenderWeather from './components/RenderWeather';
+import Cityes from './utils/Cyties';
+
 
 import './components/styles.css';
 
 
 const App = () =>
   <div className="background-img">
-    <Route path="/weather">
-      <DropDown/>
+    <DropDown Cityes = {Cityes} />
+    <Route path = '/weather/:cityName?'>
+      <RenderWeather/>
     </Route>
-    <Route exact path="/weather">
-      <Mylocation/>
-    </Route>
-    <Route exact path = "/weather/:cityName" >
-      <RenderWeek/>
-    </Route>
-  </div>
+  </div>;
 export default App;

@@ -78,5 +78,7 @@ min-width: 120px;
 }
 
 .loading-icon{
-  margin-left: 300px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }

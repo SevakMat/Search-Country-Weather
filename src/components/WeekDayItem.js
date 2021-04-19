@@ -1,28 +1,30 @@
-import { averageTemp,renderDayContent} from "../utils/service";
-import {URL_FOR_ICON} from "../utils/constants"
-
+import {renderDayContent} from "../utils/functions";
+import {URL_FOR_ICON} from "../utils/constants";
 
 import './styles.css';
 
-
 const WeekDayItem = (props) => {
-  const {wind:{speed},dt_txt }=props.item;
-  const data =`Data ${dt_txt.split(" ")[0]}`;
+  const {
+    item:{wind:{speed}, dt_txt, main:{temp_max}},
+    data:{listFromApi}, data, item} = props;
+  const datas =`Data ${dt_txt.split(" ")[0]}`;
 
-  const AverageTemp = `Temp ${averageTemp(dt_txt,props.data.ListFromApi)}C`;
-  const windSpeed = `Wind speed ${speed} `
+  const temp =`Temp ${Math.round(temp_max - 273.15)} C`;
+  const windSpeed = `Wind speed ${speed}`;
 
   return <span>
-      <div onClick={() => props.data.test(renderDayContent(props.item, props.data.ListFromApi))}  className="one-week-day" >
-      <div>{data}</div>
-      <div>{AverageTemp}</div>
+    <div 
+      onClick={() => {
+        data.setDay(renderDayContent(item, listFromApi));
+        data.setIsDayList(true);
+      }}
+      className="one-week-day" >
+      <div>{datas}</div>
+      <div>{temp}</div>
       <div>{windSpeed}</div>
-      <img className="weather-icon" src={`${URL_FOR_ICON}${props.item.weather[0].icon}@2x.png`} alt='' />
-      </div>
-    </span>
-  
-
-}
-
+      <img className="weather-icon" src={`${URL_FOR_ICON}${item.weather[0].icon}@2x.png`} alt='' />
+    </div>
+  </span>;
+};
 
 export default WeekDayItem;
