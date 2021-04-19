@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 
-
 import RenderHoursList from "./renderHoursContent";
-import {getPosition, getDataFropApi} from "../utils/service";
+import { getPosition, getDataFropApi } from "../utils/service";
 import WeekDaysList from "./WeekDaysList";
-import {LOADING_ICON_URL} from "../utils/constants";
+import { LOADING_ICON_URL } from "../utils/constants";
 import Icon from "./Icon";
 
 import "./styles.css";
 
 const RenderWeather = () => {
   const { cityName } = useParams();
-  const [selectidDay, setDay] = useState(null);
-  const [isDayList,setIsDayList]= useState();
-
-  const [allValues, setAllValues] = useState({
-    listFromApi:null,
-    selectedCityName:null,
-    loading:true
+  const [ allValues, setAllValues ] = useState({
+    listFromApi: null,
+    selectedCityName: null,
+    loading: true,
+    selectidDay: null,
+    isDayList:null,
   });
 
-  
   const getWeatherData = (e) => {
-    setIsDayList(false);
+    setAllValues({
+      ...allValues,
+      isDayList: false
+    });
     new Promise((resolve) => {
       resolve(getPosition(cityName));
     })
@@ -38,12 +38,12 @@ const RenderWeather = () => {
           resolve(getDataFropApi(data));
         })
           .then((resp) => {
-            const { data: {city: { name },list } } = resp;
+            const { data: { city: { name }, list } } = resp;
             setAllValues({
               ...allValues,
-              listFromApi:list,
-              selectedCityName:name,
-              loading:false
+              listFromApi: list,
+              selectedCityName: name,
+              loading: false
             });
           }).catch((error) => {
             console.log(error, "This is my error");
@@ -52,23 +52,21 @@ const RenderWeather = () => {
   };
 
   useEffect(() => {
-    console.log("u=in use effect");
     getWeatherData();
-  }, [cityName]);
+  }, [ cityName ]);
 
-  if (allValues.loading)return <Icon url = {LOADING_ICON_URL} className = {"loading-icon"}/>;
+  if (allValues.loading) return <Icon url={LOADING_ICON_URL} className={"loading-icon"} />;
   return <div>
-    <div className="city-name"> {cityName? cityName : `Your location is  ${allValues.selectedCityName}`} </div>
+    <div className="city-name"> {cityName ? cityName : `Your location is  ${allValues.selectedCityName}`} </div>
     <div className="contain">
-      <WeekDaysList 
-        listFromApi = {allValues.listFromApi} 
-        setDay={setDay} 
-        setIsDayList={setIsDayList}
+      <WeekDaysList
+        listFromApi = {allValues.listFromApi}
+        setAllValues = {setAllValues}
+        allValues = {allValues}
       />
     </div>
-    {isDayList && <RenderHoursList content={selectidDay} />}
+    {allValues.isDayList && <RenderHoursList content={allValues.selectidDay} />}
   </div>;
-  
 };
 
 export default RenderWeather;

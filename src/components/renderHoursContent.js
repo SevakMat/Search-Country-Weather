@@ -1,19 +1,19 @@
 import React from "react";
 
-import {URL_FOR_ICON} from "../utils/constants";
+import { URL_FOR_ICON } from "../utils/constants";
 
 import './styles.css';
 
 const RenderHoursList = (props) => {
-  const {content} = props;
+  const { content } = props;
   const renderHoursContent = () => {
     return content.map((item, i) => {
-      const {wind:{speed}, main:{temp_max},dt_txt} = item;
+      const { wind: { speed }, main: { temp_max }, dt_txt } = item;
       const windSpeed = `Wind speed ${speed}`;
-      const temp =`Temp ${Math.round(temp_max - 273.15)} C`;
+      const temp = `Temp ${Math.round(temp_max - 273.15)} C`;
 
       return (
-        <div className="one-hour" key={i}>
+        <div className="one-hour" key= {i}>
           <div>{dt_txt.split(" ")[1].substr(0, 5)}</div>
           <div>{windSpeed}</div>
           <div>{temp}</div>

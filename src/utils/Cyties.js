@@ -7,5 +7,4 @@ const Cityes = [
   "YAKUTSK"
 ];
 
-
 export default Cityes;

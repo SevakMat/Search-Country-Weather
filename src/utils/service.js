@@ -1,32 +1,32 @@
 import axios from "axios";
 
-import {APP_ADDRESS,APP_Id} from "./constants";
+import { APP_ADDRESS, APP_Id } from "./constants";
 
-export const getDataFropApi = (data)=>{
+export const getDataFropApi = (data) => {
   let url;
-  if(data.city){
+  if (data.city) {
     url = `${APP_ADDRESS}?q=${data.city}&appid=${APP_Id}`;
-  }else{
+  } else {
     url = `${APP_ADDRESS}?lat=${data.x}&lon=${data.y}&appid=${APP_Id}`;///var
   }
-  return new Promise((resolve)=>{
+  return new Promise((resolve) => {
     axios.get(url)
       .then((response) => {
         resolve(response);
       })
       .catch((error) => {
-        console.log("axios error",error);
+        console.log("axios error", error);
       });
   });
 };
 
 export const getPosition = (cityName) => {
 
-  return !cityName ? new Promise((resolve, reject)=>{
-    navigator.geolocation.getCurrentPosition((data)=>{
+  return !cityName ? new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition((data) => {
       resolve(data);
-    }, (err)=>{
+    }, (err) => {
       reject(err);
     });
-  }) : {coords: {latitude: '', longitude: ''}};
+  }) : { coords: { latitude: '', longitude: '' } };
 };

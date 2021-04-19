@@ -9,7 +9,7 @@ const DropDown = () => {
 
   const history = useHistory();
   const selectCity = (e) => {
-    const{target:{value}} = e;
+    const { target: { value } } = e;
     if (Object.values(Cyties).includes(value)) {
       history.push(`/weather/${value}`);
     }
@@ -17,8 +17,8 @@ const DropDown = () => {
 
   const dropdownRender = () => {
     return (<>
-      <input type="text" className="select-box" list="cars" onChange={selectCity}/>
-      <datalist id ="cars">
+      <input type="text" className="select-box" list="cars" onChange={selectCity} />
+      <datalist id="cars">
         {Cyties.map((item, i) => {
           return <option to={item} key={i} defaultValue>{item}</option>;
         })}
