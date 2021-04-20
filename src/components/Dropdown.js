@@ -1,32 +1,40 @@
 import React from 'react';
-import { useHistory } from "react-router-dom";
 
-import Cyties from '../utils/Cyties';
+const DropDown = ({
+  options,
+  onChnage,
+}) => {
 
-import './styles.css';
+  // const history = useHistory();
+  // const selectCity = (e) => {
+  //   const { target: { value } } = e;
+  //   if (Object.values(Cyties).includes(value)) {
+  //     history.push(`/weather/${value}`);
+  //   }
+  // };
+  // 400
 
-const DropDown = () => {
+  const renderlist = () => (
+    options.map((item, i) => (
+      <option to={item} key={i} defaultValue>{item}</option>
+    ))
+  );
 
-  const history = useHistory();
-  const selectCity = (e) => {
+  const handleChange = (e) => {
     const { target: { value } } = e;
-    if (Object.values(Cyties).includes(value)) {
-      history.push(`/weather/${value}`);
+
+    if (Object.values(options).includes(value)) {
+      onChnage(value);
     }
   };
 
-  const dropdownRender = () => {
-    return (<>
-      <input type="text" className="select-box" list="cars" onChange={selectCity} />
+  return (
+    <>
+      <input type="text" className="select-box" list="cars" onChange={handleChange} />
       <datalist id="cars">
-        {Cyties.map((item, i) => {
-          return <option to={item} key={i} defaultValue>{item}</option>;
-        })}
+        {renderlist()}
       </datalist>
     </>
-    );
-  };
-
-  return dropdownRender();
+  );
 };
 export default DropDown;

@@ -6,7 +6,9 @@ const WeekDaysList = (props) => {
 
   return listFromApi.map((item, i) => {
     const { dt_txt } = item;
-    if (!dt_txt.includes("15:00:00")) { return null; }
+    if (!dt_txt.includes("15:00:00")) { 
+      return null; 
+    }
 
     return <WeekDayItem item={item} data={props} key={i} />;
   });

@@ -1,8 +1,12 @@
 import "./styles.css";
 
-const Icon = (props) =>{
-  
-  return <div className ={ props.className}> 
-    <img src ={props.url } alt=""/>
-  </div>;
-};export default Icon;
+const Icon = ({
+  className = '',
+  url,
+}) => (
+  <div className={className}> 
+    <img src={url} alt="" />
+  </div>
+);
+
+export default Icon;

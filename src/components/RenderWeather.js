@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 
-import RenderHoursList from "./renderHoursContent";
+import RenderHoursList from "./RenderHoursContent";
 import { getPosition, getDataFropApi } from "../utils/service";
 import WeekDaysList from "./WeekDaysList";
 import { LOADING_ICON_URL } from "../utils/constants";
@@ -14,16 +14,24 @@ const RenderWeather = () => {
   const [ allValues, setAllValues ] = useState({
     listFromApi: null,
     selectedCityName: null,
-    loading: true,
+    loading: false,
     selectidDay: null,
-    isDayList:null,
   });
+  const [ selectedCityName, setCityName ] = useState('');
+  const [ isDaySelected, onDayChange ] = useState(false);
+  const history = useHistory();
 
-  const getWeatherData = (e) => {
-    setAllValues({
-      ...allValues,
-      isDayList: false
-    });
+  const onCityChange = (value) => {
+    history.push(`/weather/${value}`);
+    setCityName(value);
+    onDayChange(false);
+  };
+
+  const getWeatherData = () => {
+    // setAllValues({
+    //   ...allValues,
+    //   isDaySelected: false
+    // });
     new Promise((resolve) => {
       resolve(getPosition(cityName));
     })
@@ -55,18 +63,24 @@ const RenderWeather = () => {
     getWeatherData();
   }, [ cityName ]);
 
-  if (allValues.loading) return <Icon url={LOADING_ICON_URL} className={"loading-icon"} />;
-  return <div>
-    <div className="city-name"> {cityName ? cityName : `Your location is  ${allValues.selectedCityName}`} </div>
-    <div className="contain">
-      <WeekDaysList
-        listFromApi = {allValues.listFromApi}
-        setAllValues = {setAllValues}
-        allValues = {allValues}
-      />
+  if (allValues.loading) {
+    return <Icon url={LOADING_ICON_URL} className="loading-icon" />;
+  }
+
+  return (
+    <div>
+      <DropDown options={Cityes} onChange={onCityChange} />
+      <div className="city-name"> {cityName ? cityName : `Your location is  ${allValues.selectedCityName}`} </div>
+      <div className="contain">
+        <WeekDaysList
+          listFromApi={allValues.listFromApi}
+          setAllValues={setAllValues}
+          allValues={allValues}
+        />
+      </div>
+      {isDaySelected && <RenderHoursList content={allValues.selectidDay} />}
     </div>
-    {allValues.isDayList && <RenderHoursList content={allValues.selectidDay} />}
-  </div>;
+  );
 };
 
 export default RenderWeather;

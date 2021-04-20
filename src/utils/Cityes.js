@@ -6,5 +6,4 @@ const Cyties = [
   "Antananarivo"
 ];
 
-
 export default Cyties;

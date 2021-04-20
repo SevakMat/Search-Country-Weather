@@ -19,10 +19,10 @@ const WeekDayItem = (props) => {
         data.setAllValues({
           ...data.allValues,
           isDayList:true,
-          selectidDay:renderDayContent(item, listFromApi)
+          selectedDay: renderDayContent(item, listFromApi)
         });
       }}
-      className="one-week-day" >
+      className="one-week-day">
       <div>{datas}</div>
       <div>{temp}</div>
       <div>{windSpeed}</div>

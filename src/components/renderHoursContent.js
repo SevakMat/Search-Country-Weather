@@ -4,8 +4,8 @@ import { URL_FOR_ICON } from "../utils/constants";
 
 import './styles.css';
 
-const RenderHoursList = (props) => {
-  const { content } = props;
+const RenderHoursList = ({ content }) => {
+
   const renderHoursContent = () => {
     return content.map((item, i) => {
       const { wind: { speed }, main: { temp_max }, dt_txt } = item;
@@ -25,7 +25,7 @@ const RenderHoursList = (props) => {
 
   return (
     <div>
-      <div className="city-name">{props.content[0].dt_txt.split(" ")[0]}</div>
+      <div className="city-name">{content[0].dt_txt.split(" ")[0]}</div>
       <div className="hours-content">
         {renderHoursContent()}
       </div>
