@@ -1,4 +1,4 @@
-export const renderDayContent = (e,listFromApi) => {
+export const renderDayContent = (e, listFromApi) => {
 
   return listFromApi.filter((item) => {
     const { dt_txt } = e;

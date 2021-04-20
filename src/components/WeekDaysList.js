@@ -1,8 +1,9 @@
 import WeekDayItem from "../components/WeekDayItem";
 
 const WeekDaysList = (props) => {
-  const { listFromApi } = props;
-  if (!listFromApi) return null;
+  const { allValues: { listFromApi } } = props;
+
+  if (!listFromApi) { return null; };
 
   return listFromApi.map((item, i) => {
     const { dt_txt } = item;
@@ -10,6 +11,6 @@ const WeekDaysList = (props) => {
 
     return <WeekDayItem item={item} data={props} key={i} />;
   });
-};
+}; 
 
 export default WeekDaysList;

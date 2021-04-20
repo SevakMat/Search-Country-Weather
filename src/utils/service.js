@@ -21,12 +21,13 @@ export const getDataFropApi = (data) => {
 };
 
 export const getPosition = (cityName) => {
+  if (cityName) { return { coords: { latitude: '', longitude: '' } }; }
 
-  return !cityName ? new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition((data) => {
       resolve(data);
     }, (err) => {
       reject(err);
     });
-  }) : { coords: { latitude: '', longitude: '' } };
+  });
 };
