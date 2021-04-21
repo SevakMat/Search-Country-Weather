@@ -65,6 +65,14 @@ const RenderWeather = () => {
     getWeatherData();
   }, [ cityName ]);
 
+  const RenderCityName = () => {
+    return (
+      < div className="city-name" >
+        { cityName ? cityName : `Your location is  ${selectedCityName}`}
+      </div >
+    );
+  };
+
   if (loading) {
     return (
       <div className="loading-icon">
@@ -72,15 +80,7 @@ const RenderWeather = () => {
       </div>
     );
   };
-  
-  const RenderCityName = () => {
-    return (
-      < div className="city-name" >
-        { cityName ? cityName : `Your location is  ${selectedCityName}`}
-      </div >
-    );
 
-  };
   return (
     <div>
       <DropDown options={Cityes} onChange={OnCityChange} />
