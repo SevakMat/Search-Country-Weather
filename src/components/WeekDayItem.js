@@ -2,7 +2,6 @@ import { renderDayContent } from "../utils/helpers";
 import { URL_FOR_ICON } from "../utils/constants";
 import Icon from "./Icon";
 
-// Test
 const WeekDayItem = (props) => {
   const {
     item: { wind: { speed }, dt_txt, main: { temp_max } },
