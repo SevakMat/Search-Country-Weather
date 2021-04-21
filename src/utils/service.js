@@ -21,7 +21,6 @@ export const getDataFropApi = (data) => {
 };
 
 export const getPosition = (cityName) => {
-  if (cityName) { return { coords: { latitude: '', longitude: '' } }; }
 
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition((data) => {

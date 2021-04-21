@@ -82,3 +82,6 @@ min-width: 120px;
   justify-content: center;
   align-items: center;
 }
+.data-list{
+  max-height: 50px;
+}
