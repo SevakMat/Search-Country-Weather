@@ -1,4 +1,4 @@
-const Cityes = [
+const Cities = [
   "Yerevan",
   "Jermuk",
   "London",
@@ -26,4 +26,4 @@ const Cityes = [
   "Yangon",
 ];
 
-export default Cityes;
+export default Cities;

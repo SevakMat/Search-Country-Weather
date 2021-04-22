@@ -9,35 +9,29 @@ import RenderHoursList from "./RenderHoursContent";
 import { getPosition, getDataFropApi } from "../utils/service";
 import { LOADING_ICON_URL } from "../utils/constants";
 
-import Cityes from '../utils/Cityes';
+import Cities from '../utils/Cities';
 
 const RenderWeather = () => {
-  
   const { cityName } = useParams();
   const history = useHistory();
-
-  const [ allValues, setAllValues ] = useState({
-    listFromApi: null,
-    loading: null,
-    selectidDay: null,
-  });
   
+  const [ listFromApi, setListFromApi ] = useState('');
+  const [ loading, setLoading ] = useState('');
+  const [ selectidDay, setSelectidDay ] = useState('');
+
   const [ selectedCityName, setCityName ] = useState('');
   const [ isDaySelected, onDayChange ] = useState('');
-  const { selectidDay, loading } = allValues;
 
-  const OnCityChange = (value) => {
+  const onCityChange = (value) => {
     history.push(`/weather/${value}`);
     onDayChange(false);
   };
   const getWeatherData = async (e) => {
-    setAllValues({
-      ...allValues,
-      loading: true
-    });
+
+    setLoading(true);
     let data = null;
 
-    if (!allValues.selectidDay) {
+    if (!selectidDay) {
       const position = await getPosition(cityName);
       const { coords: { latitude, longitude } } = position;
       data = {
@@ -53,11 +47,9 @@ const RenderWeather = () => {
     const resp = await getDataFropApi(data);
 
     const { data: { city: { name }, list } } = resp;
-    setAllValues({
-      ...allValues,
-      listFromApi: list,
-      loading: false
-    });
+
+    setLoading(false);
+    setListFromApi(list);
     setCityName(name);
   };
   
@@ -65,7 +57,7 @@ const RenderWeather = () => {
     getWeatherData();
   }, [ cityName ]);
 
-  const RenderCityName = () => {
+  const renderCityName = () => {
     return (
       < div className="city-name" >
         { cityName ? cityName : `Your location is  ${selectedCityName}`}
@@ -83,14 +75,15 @@ const RenderWeather = () => {
 
   return (
     <div>
-      <DropDown options={Cityes} onChange={OnCityChange} />
+      <DropDown options={Cities} onChange={onCityChange} />
 
-      {RenderCityName()}
+      {renderCityName()}
       <div className="contain">
+        
         <WeekDaysList
+          listFromApi={listFromApi}
+          setSelectidDay={setSelectidDay}
           onDayChange={onDayChange}
-          setAllValues={setAllValues}
-          allValues={allValues}
         />
       </div>
       {isDaySelected && <RenderHoursList content={selectidDay} />}

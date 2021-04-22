@@ -20,7 +20,7 @@ const RenderHoursContent = ({ content }) => {
         <div>{hour}</div>
         <div>{windSpeed}</div>
         <div>{temp}</div>
-        <Icon url={`${URL_FOR_ICON}${tempElem.weather[0].icon}@2x.png`} className={"weather-icon"} ></Icon>
+        <Icon url={`${URL_FOR_ICON}${tempElem.weather[0].icon}@2x.png`} className={"weather-icon"} />
       </div>
     );
   });
