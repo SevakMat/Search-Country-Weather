@@ -1,4 +1,5 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 
 const DropDown = ({ options, onChange }) => {
 
@@ -18,11 +19,16 @@ const DropDown = ({ options, onChange }) => {
   return (
     <>
       <input className="select-box" list="Citylist" onChange={handleChange} />
-      <datalist id = "Citylist">
+      <datalist id="Citylist">
         {renderlist()}
       </datalist>
     </>
   );
+};
+
+DropDown.propTypes = {
+  options: PropTypes.array,
+  onChange: PropTypes.function
 };
 
 export default DropDown;

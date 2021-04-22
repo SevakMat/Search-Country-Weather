@@ -1,8 +1,10 @@
+import React from "react"
+import { PropTypes } from 'prop-types';
+
 import { URL_FOR_ICON } from "../utils/constants";
 import Icon from "./Icon";
 
-const CityName = (props) => {
-  const { name } = props;
+const CityName = ({ name }) => {
 
   return <div className="city-name">{name}</div>;
 };
@@ -27,15 +29,22 @@ const RenderHoursContent = ({ content }) => {
 };
 
 const RenderHoursList = ({ content }) => {
-
   return (
     <div>
       <CityName name={content[0].dt_txt.split(" ")[0]} />
       <div className="hours-content">
-        <RenderHoursContent content={content}/>
+        <RenderHoursContent content={content} />
       </div>
     </div>
   );
+};
+
+RenderHoursList.propTypes = {
+  content: PropTypes.object,
+};
+
+CityName.propTypes = {
+  name: PropTypes.string
 };
 
 export default RenderHoursList;

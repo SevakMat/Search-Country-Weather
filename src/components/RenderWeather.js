@@ -14,19 +14,19 @@ import Cities from '../utils/Cities';
 const RenderWeather = () => {
   const { cityName } = useParams();
   const history = useHistory();
-  
-  const [ listFromApi, setListFromApi ] = useState('');
-  const [ loading, setLoading ] = useState('');
-  const [ selectidDay, setSelectidDay ] = useState('');
 
-  const [ selectedCityName, setCityName ] = useState('');
-  const [ isDaySelected, onDayChange ] = useState('');
+  const [listFromApi, setListFromApi] = useState('');
+  const [loading, setLoading] = useState('');
+  const [selectidDay, setSelectidDay] = useState('');
+
+  const [selectedCityName, setCityName] = useState('');
+  const [isDaySelected, onDayChange] = useState('');
 
   const onCityChange = (value) => {
     history.push(`/weather/${value}`);
     onDayChange(false);
   };
-  const getWeatherData = async (e) => {
+  const getWeatherData = async () => {
 
     setLoading(true);
     let data = null;
@@ -42,8 +42,8 @@ const RenderWeather = () => {
       data = {
         city: cityName,
       };
-    };
-   
+    }
+
     const resp = await getDataFropApi(data);
 
     const { data: { city: { name }, list } } = resp;
@@ -52,10 +52,10 @@ const RenderWeather = () => {
     setListFromApi(list);
     setCityName(name);
   };
-  
+
   useEffect(() => {
     getWeatherData();
-  }, [ cityName ]);
+  }, [cityName]);
 
   const renderCityName = () => {
     return (
@@ -71,7 +71,7 @@ const RenderWeather = () => {
         <Icon url={LOADING_ICON_URL} />
       </div>
     );
-  };
+  }
 
   return (
     <div>
@@ -79,7 +79,7 @@ const RenderWeather = () => {
 
       {renderCityName()}
       <div className="contain">
-        
+
         <WeekDaysList
           listFromApi={listFromApi}
           setSelectidDay={setSelectidDay}

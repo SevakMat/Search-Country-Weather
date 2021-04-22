@@ -20,7 +20,7 @@ export const getDataFropApi = (data) => {
   });
 };
 
-export const getPosition = (cityName) => {
+export const getPosition = () => {
 
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition((data) => {
