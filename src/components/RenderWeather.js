@@ -15,17 +15,21 @@ const RenderWeather = () => {
   const { cityName } = useParams();
   const history = useHistory();
 
-  const [listFromApi, setListFromApi] = useState('');
+  const [listFromApi, setListFromApi] = useState([]);
   const [loading, setLoading] = useState('');
-  const [selectidDay, setSelectidDay] = useState('');
+  const [selectidDay, setSelectidDay] = useState();
 
   const [selectedCityName, setCityName] = useState('');
-  const [isDaySelected, onDayChange] = useState('');
+  const [isDaySelected, onDayChange] = useState(null);
 
   const onCityChange = (value) => {
     history.push(`/weather/${value}`);
     onDayChange(false);
   };
+  
+  const onClickMap = () => {
+    history.push(`/weather/map`);
+   };
   const getWeatherData = async () => {
 
     setLoading(true);
@@ -75,8 +79,8 @@ const RenderWeather = () => {
 
   return (
     <div>
-      <DropDown options={Cities} onChange={onCityChange} />
-
+      <DropDown options={Cities} onChangeValue={onCityChange} />
+      <button onClick = {onClickMap}>Map</button>
       {renderCityName()}
       <div className="contain">
 

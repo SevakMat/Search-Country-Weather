@@ -1,5 +1,5 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { renderDayContent } from "../utils/helpers";
 import { URL_FOR_ICON } from "../utils/constants";
@@ -20,6 +20,7 @@ const WeekDayItem = (props) => {
         onClick={() => {
           onDayChange(true);
           setSelectidDay(renderDayContent(item, listFromApi));
+          console.log("wwwwwwww",renderDayContent(item, listFromApi))
         }}
         className="one-week-day" >
         <div>{datas}</div>

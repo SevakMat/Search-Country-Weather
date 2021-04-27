@@ -1,7 +1,7 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 
-const DropDown = ({ options, onChange }) => {
+const DropDown = ({ options, onChangeValue }) => {
 
   const renderlist = () => (
     options.map((item, i) => (
@@ -12,7 +12,7 @@ const DropDown = ({ options, onChange }) => {
   const handleChange = (e) => {
     const { target: { value } } = e;
     if (Object.values(options).includes(value)) {
-      onChange(value);
+      onChangeValue(value);
     }
   };
 
@@ -28,7 +28,7 @@ const DropDown = ({ options, onChange }) => {
 
 DropDown.propTypes = {
   options: PropTypes.array,
-  onChange: PropTypes.function
+  onChangeValue: PropTypes.function
 };
 
 export default DropDown;

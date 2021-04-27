@@ -1,5 +1,5 @@
 import React from "react"
-import { PropTypes } from 'prop-types';
+import PropTypes  from 'prop-types';
 
 import { URL_FOR_ICON } from "../utils/constants";
 import Icon from "./Icon";
@@ -40,7 +40,7 @@ const RenderHoursList = ({ content }) => {
 };
 
 RenderHoursList.propTypes = {
-  content: PropTypes.object,
+  content: PropTypes.array,
 };
 
 CityName.propTypes = {
