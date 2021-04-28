@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {useSelector} from "react-redux";
 
 import Icon from "./Icon";
 import DropDown from './Dropdown';
@@ -8,30 +10,29 @@ import WeekDaysList from "./WeekDaysList";
 import RenderHoursList from "./RenderHoursContent";
 import { getPosition, getDataFropApi } from "../utils/service";
 import { LOADING_ICON_URL } from "../utils/constants";
+import {setListFromApi} from "../reducers/reposReducer";
 
 import Cities from '../utils/Cities';
 
 const RenderWeather = () => {
+
+  const selectidDay = useSelector(state => state.selectidDayData.selectidDayData);
+  const dispatch = useDispatch();
   const { cityName } = useParams();
   const history = useHistory();
-
-  const [listFromApi, setListFromApi] = useState([]);
   const [loading, setLoading] = useState('');
-  const [selectidDay, setSelectidDay] = useState();
-
   const [selectedCityName, setCityName] = useState('');
   const [isDaySelected, onDayChange] = useState(null);
 
-  const onCityChange = (value) => {
-    history.push(`/weather/${value}`);
-    onDayChange(false);
+  const onCityChange = (e) => {
+    const { target: { value } } = e;
+    if (Object.values(Cities).includes(value)) {
+      history.push(`/weather/${value}`);
+      onDayChange(false);
+    }
   };
   
-  const onClickMap = () => {
-    history.push(`/weather/map`);
-   };
   const getWeatherData = async () => {
-
     setLoading(true);
     let data = null;
 
@@ -49,11 +50,9 @@ const RenderWeather = () => {
     }
 
     const resp = await getDataFropApi(data);
-
     const { data: { city: { name }, list } } = resp;
-
     setLoading(false);
-    setListFromApi(list);
+    dispatch(setListFromApi(list));
     setCityName(name);
   };
 
@@ -80,13 +79,9 @@ const RenderWeather = () => {
   return (
     <div>
       <DropDown options={Cities} onChangeValue={onCityChange} />
-      <button onClick = {onClickMap}>Map</button>
-      {renderCityName()}
+        {renderCityName()}
       <div className="contain">
-
         <WeekDaysList
-          listFromApi={listFromApi}
-          setSelectidDay={setSelectidDay}
           onDayChange={onDayChange}
         />
       </div>

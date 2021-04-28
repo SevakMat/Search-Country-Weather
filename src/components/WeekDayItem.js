@@ -1,16 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { renderDayContent } from "../utils/helpers";
 import { URL_FOR_ICON } from "../utils/constants";
 import Icon from "./Icon";
+import { selectedDayData } from "../reducers/reposReducer";
 
 const WeekDayItem = (props) => {
+  const dispach = useDispatch();
   const { item: { wind: { speed }, dt_txt, main: { temp_max } },
-  listFromApi, setSelectidDay, onDayChange, item } = props;
-
+  onDayChange, item } = props;
+  const listFromApi = useSelector(state => state.listState.listFromApi);
   const datas = `Data ${dt_txt.split(" ")[0]}`;
-
   const temp = `Temp ${Math.round(temp_max - 273.15)} C`;
   const windSpeed = `Wind speed ${speed}`;
 
@@ -19,8 +22,7 @@ const WeekDayItem = (props) => {
       <div
         onClick={() => {
           onDayChange(true);
-          setSelectidDay(renderDayContent(item, listFromApi));
-          console.log("wwwwwwww",renderDayContent(item, listFromApi))
+          dispach(selectedDayData(renderDayContent(item, listFromApi)));
         }}
         className="one-week-day" >
         <div>{datas}</div>

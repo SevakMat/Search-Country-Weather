@@ -24,7 +24,6 @@ export const getPosition = () => {
 
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition((data) => {
-      console.log(data);
       resolve(data);
     }, (err) => {
       reject(err);

@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes  from 'prop-types';
-
+import { useSelector } from "react-redux";
 import WeekDayItem from "../components/WeekDayItem";
 
 const WeekDaysList = (props) => {
 
-  const { listFromApi } = props;
-
+  const listFromApi = useSelector(state => state.listState.listFromApi);
   if (!listFromApi) { return null; }
 
   return listFromApi.map((item, i) => {

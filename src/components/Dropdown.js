@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+
 const DropDown = ({ options, onChangeValue }) => {
 
   const renderlist = () => (
@@ -9,16 +10,9 @@ const DropDown = ({ options, onChangeValue }) => {
     ))
   );
 
-  const handleChange = (e) => {
-    const { target: { value } } = e;
-    if (Object.values(options).includes(value)) {
-      onChangeValue(value);
-    }
-  };
-
   return (
     <>
-      <input className="select-box" list="Citylist" onChange={handleChange} />
+      <input className="select-box" list="Citylist" onChange={onChangeValue} />
       <datalist id="Citylist">
         {renderlist()}
       </datalist>
